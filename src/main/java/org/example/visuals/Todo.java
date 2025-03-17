@@ -1,7 +1,7 @@
-package org.example;
+package org.example.visuals;
 
-import static org.example.Config.DEFAULT_BUTTON_SIZE;
-import static org.example.Config.DEFAULT_FONT;
+import static org.example.visuals.Config.DEFAULT_BUTTON_SIZE;
+import static org.example.visuals.Config.DEFAULT_FONT;
 
 import java.awt.Color;
 import java.awt.Dimension;

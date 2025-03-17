@@ -1,5 +1,6 @@
-package org.example;
+package org.example.visual;
 
+import org.example.visuals.TodoList;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

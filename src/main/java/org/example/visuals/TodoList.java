@@ -1,7 +1,7 @@
-package org.example;
+package org.example.visuals;
 
-import static org.example.Config.DEFAULT_BUTTON_SIZE;
-import static org.example.Config.DEFAULT_FONT;
+import static org.example.visuals.Config.DEFAULT_BUTTON_SIZE;
+import static org.example.visuals.Config.DEFAULT_FONT;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -14,17 +14,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.example.service.TodoService;
+
 public class TodoList extends JFrame implements ActionListener {
-    JFrame frame;
-    JPanel panel;
+    private TodoService todoService = new TodoService();
 
-    JTextField textField;
-    JButton add;
+    public JFrame frame;
+    public JPanel panel;
 
-    List<JPanel> todos = new ArrayList<>();
+    public JTextField textField;
+    public JButton add;
+
+    public List<JPanel> todos = new ArrayList<>();
 
     // default constructor
-    TodoList() {
+    public TodoList() {
         // create frame
         frame = new JFrame("Todo List");
 

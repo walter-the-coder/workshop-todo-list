@@ -1,4 +1,4 @@
-package org.example;
+package org.example.visuals;
 
 import java.awt.Dimension;
 import java.awt.Font;
