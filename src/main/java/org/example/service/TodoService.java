@@ -6,6 +6,10 @@ import java.util.Map;
 public class TodoService {
     private Map<String, Boolean> todos = new HashMap<>();
 
+    public Map<String, Boolean> getTodos() {
+        return todos;
+    }
+
     public void addTodo(String todo) {
         todos.put(todo, false);
     }
