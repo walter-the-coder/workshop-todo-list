@@ -16,13 +16,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class Todo extends JPanel implements ActionListener, ItemListener {
-    JTextField text;
-    JCheckBox check;
-    JButton remove;
+    public JTextField text;
+    public JCheckBox check;
+    public JButton remove;
     JButton edit;
 
-    Todo(String todoString) {
-        text = new JTextField(todoString, 10);
+    public TodoList parent; // Reference to TodoList for UI updates
+
+    Todo(String todoString, TodoList parent) {
+        this.parent = parent;
+
+        text = new JTextField(todoString, 15);
         check = new JCheckBox("");
         edit = new JButton("Edit");
         remove = new JButton("Remove");
@@ -30,7 +34,7 @@ public class Todo extends JPanel implements ActionListener, ItemListener {
         text.setEditable(false);
         check.setName("done");
 
-        check.setPreferredSize(DEFAULT_BUTTON_SIZE);
+        check.setPreferredSize(new Dimension(20, 20));
         edit.setPreferredSize(DEFAULT_BUTTON_SIZE);
         remove.setPreferredSize(DEFAULT_BUTTON_SIZE);
 
@@ -48,16 +52,24 @@ public class Todo extends JPanel implements ActionListener, ItemListener {
         add(edit);
         add(remove);
 
-        // set Background of panel
-        setBackground(Color.gray);
-
-        // set size
-        setPreferredSize(new Dimension(400, 135));
+        // Set background color
+        setBackground(Color.LIGHT_GRAY);
+        setPreferredSize(new Dimension(350, 150));
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Todo -> Button press -> getActionCommand=" + e.getActionCommand());
+        String command = e.getActionCommand();
+
+        if (command.equals("Edit")) {
+            text.setEditable(true);
+            edit.setText("Save"); // Change button to "Save"
+        } else if (command.equals("Save")) {
+            text.setEditable(false);
+            edit.setText("Edit"); // Change button back to "Edit"
+        } else if (command.equals("Remove")) {
+            parent.removeTodo(this);
+        }
     }
 
     @Override

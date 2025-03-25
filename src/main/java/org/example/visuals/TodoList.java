@@ -25,46 +25,34 @@ public class TodoList extends JFrame implements ActionListener {
     public JTextField textField;
     public JButton add;
 
-    public List<JPanel> todos = new ArrayList<>();
+    public List<Todo> todos = new ArrayList<>(); // Store Todo objects
 
-    // default constructor
     public TodoList() {
-        // create frame
+        // Create frame
         frame = new JFrame("Todo List");
 
-        // create panel
+        // Create panel
         panel = new JPanel();
 
-        // create a textfield
-        textField = new JTextField(10);
+        // Create a textfield
+        textField = new JTextField(15);
 
-        // set the textfield size
-        textField.setPreferredSize(new Dimension(600, 50));
-
-        // set the textfield font
+        // Set the textfield size
+        textField.setPreferredSize(new Dimension(300, 40));
         textField.setFont(DEFAULT_FONT);
 
-        // add buttons
+        // Add button
         add = new JButton("Add todo");
-
-        // set number buttons size and font
         add.setPreferredSize(DEFAULT_BUTTON_SIZE);
-
         add.setFont(DEFAULT_FONT);
-
-        // add button action listeners
         add.addActionListener(this);
 
-        // add elements to panel
+        // Add components to panel
         panel.add(textField);
         panel.add(add);
 
-        todos.add(new Todo("TODO"));
-        todos.forEach((it) -> panel.add(it));
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 500);
-
+        frame.setSize(450, 600);
         frame.add(panel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -72,8 +60,29 @@ public class TodoList extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String inputKey = e.getActionCommand();
-        System.out.println("TodoList -> Button press -> inputKey=" + inputKey);
-        System.out.println("TodoList -> textField=" + textField.getText());
+        if (e.getSource() == add) {
+            String todoText = textField.getText().trim();
+
+            if (!todoText.isEmpty()) {
+                addTodo(todoText);
+                textField.setText(""); // Clear text field
+            }
+        }
+    }
+
+    public void addTodo(String todoText) {
+        Todo newTodo = new Todo(todoText, this); // Pass this instance of TodoList
+        todos.add(newTodo);
+        panel.add(newTodo);
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    public void removeTodo(Todo todo) {
+        todos.remove(todo);
+        panel.remove(todo);
+        panel.revalidate();
+        panel.repaint();
     }
 }
